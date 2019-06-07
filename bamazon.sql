@@ -11,7 +11,7 @@ CREATE TABLE products (
     DepartmentName VARCHAR(50) NOT NULL,
     Price FLOAT(7, 2) NOT NULL,
     StockQuantity INTEGER(7) NOT NULL,
-    PRIMARY KEY (ItemID)
+    PRIMARY KEY (ItemId)
 );
     
     

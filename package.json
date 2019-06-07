@@ -22,6 +22,7 @@
   "dependencies": {
     "inquirer": "^3.3.0",
     "mysql": "github:mysqljs/mysql",
-    "package": "^1.0.1"
+    "package": "^1.0.1",
+    "sql": "^0.78.0"
   }
 }

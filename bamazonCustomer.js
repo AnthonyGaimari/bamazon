@@ -19,7 +19,7 @@ var connection = mysql.createConnection({
 connection.connect(function(err) {
     if (err) throw err;
     //console.log("connected as id " + connection.threadId);
-
+    promptUserPurchase();
 });
 
 
@@ -59,15 +59,17 @@ function promptUserPurchase() {
 
         var item = input.item_id;
         var quantity = input.quantity;
-
+        //console.log("Line 62")
         // Query db to confirm that the given item ID exists in the desired quantity
         var queryStr = 'SELECT * FROM products WHERE ?';
 
-        connection.query(queryStr, { item_id: item }, function(err, data) {
+        connection.query(queryStr, {  ItemId: item }, function(err, data) {
+            console.log(err);
+            console.log(data);
             if (err) throw err;
-
+            
             // If the user has selected an invalid item ID, data attay will be emptywha
-            // console.log('data = ' + JSON.stringify(data));
+             console.log('data = ' + JSON.stringify(data));
 
             if (data.length === 0) {
                 console.log('ERROR: Invalid Item ID. Please select a valid Item ID.');
@@ -84,7 +86,7 @@ function promptUserPurchase() {
                     console.log('Congratulations, the product you requested is in stock! Placing order!');
 
                     // Construct the updating query string
-                    var updateQueryStr = 'UPDATE products SET stock_quantity = ' + (productData.stock_quantity - quantity) + ' WHERE item_id = ' + item;
+                    var updateQueryStr = 'UPDATE products SET stock_quantity = ' + (productData.stock_quantity - quantity) + ' WHERE ItemId = ' + item;
                     // console.log('updateQueryStr = ' + updateQueryStr);
 
                     // Update the inventory
@@ -113,5 +115,3 @@ function promptUserPurchase() {
 
 
 
-// * The first should ask them the ID of the product they would like to buy.
-//    * The second message should ask how many units of the product they would like to buy.
